@@ -1,0 +1,74 @@
+<div class="card mt-3">
+    <div class="card-header bg-success text-white">Listing Cities </div>
+    <div class="card-body">
+        <div class="table-responsive mt-2">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="bg-success text-white">
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>CountryName</th>
+                        <th>Population</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="cities$ | async as response">
+                        <tr *ngFor="let city of response; let i=index">
+                            <td>{{ i+1 }}</td>
+                            <td>{{ city.name }}</td>
+                            <td>{{ city.countryName }}</td>
+                            <td>{{ city.population }}</td>
+                            <td>
+                                <button class="btn btn-success btn-sm me-1 mb-1" title="edit"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="select(city)">
+                                    update
+                                </button>
+                                <button class="btn btn-danger btn-sm mb-1" title="delete" (click)="delete(city.id)">
+                                    delete
+                                </button>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" *ngIf="form">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Update City</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="form">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input class="form-control" id="name" formControlName="name">
+                  <small class="text-danger fw-bold" *ngIf="form.get('name')?.dirty && form.get('name')?.hasError('required')">Name is required</small>
+                </div>
+                <div class="mb-3">
+                  <label for="countryName" class="form-label">Country Name</label>
+                  <input class="form-control" id="countryName" formControlName="countryName">
+                  <small class="text-danger fw-bold" *ngIf="form.get('countryName')?.dirty && form.get('countryName')?.hasError('required')">Country Name is required</small>
+                </div>
+                <div class="mb-3">
+                  <label for="population" class="form-label">Population</label>
+                  <input type="number" class="form-control" id="population" formControlName="population">
+                  <small class="text-danger fw-bold" *ngIf="form.get('population')?.dirty && form.get('population')?.hasError('required')">Population is required</small>
+                  <small class="text-danger fw-bold" *ngIf="form.get('population')?.dirty && form.get('population')?.hasError('min')">Population is a positive number</small>
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="save()" [disabled]="form.invalid">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

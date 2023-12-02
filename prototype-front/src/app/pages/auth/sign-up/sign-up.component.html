@@ -1,0 +1,33 @@
+<div class="mt-5 mx-auto row justify-content-center">
+  <div class="col-lg-6 col-9 card p-0">
+    <div class="card-header">
+      <h3 class="text-center">Sign-up</h3>
+    </div>
+    <div class="card-body" >
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="text" class="form-control" id="email" formControlName="email">
+          <small class="text-danger fw-bold"*ngIf="form.get('email')?.dirty && form.get('email')?.hasError('required')">Email is required</small>
+          <small class="text-danger fw-bold"*ngIf="form.get('email')?.dirty && form.get('email')?.hasError('email')">Email is invalid</small>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" formControlName="pwd">
+          <small class="text-danger fw-bold"*ngIf="form.get('pwd')?.dirty && form.get('pwd')?.hasError('required')">Password is required</small>
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPWD">
+          <small class="text-danger fw-bold"*ngIf="form.get('confirmPWD')?.dirty && form.get('confirmPWD')?.hasError('required')">Password is required</small>
+          <small class="text-danger fw-bold"*ngIf="form.get('confirmPWD')?.dirty && form.hasError('invalid') && !form.get('confirmPWD')?.hasError('required')">Password MissMatch</small>
+        </div>
+        <div >
+          <button type="submit" class="btn btn-primary w-100" [disabled]="form.invalid">Sign-up {{form.invalid}}</button>
+          <small class="text-danger fw-bold d-block mt-2" *ngIf="errorMsg">{{errorMsg}}</small>
+          <a routerLink="/sign-in" class="text-primary d-block mt-2">Sign-in</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

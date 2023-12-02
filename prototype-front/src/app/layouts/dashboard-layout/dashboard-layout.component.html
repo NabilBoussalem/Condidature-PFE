@@ -1,0 +1,31 @@
+<div class="row m-0 w-100">
+  <div class="col-lg-2 col-md-12 p-0 sidebar">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav flex-column w-100 mt-5">
+          <li class="nav-item ps-4 cursor" routerLink="/dashboard" routerLinkActive="text-white">
+            <a class="nav-link">Dashboard</a>
+          </li>
+          <li class="nav-item ps-4 cursor" routerLink="/dashboard/crud" routerLinkActive="active">
+            <a class="nav-link">CRUD</a>
+          </li>
+
+          <li class="nav-item mt-5">
+            <Button class="btn btn-warning w-75 d-block mx-auto" (click)="logout()">Log Out</Button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <!-- <div class="col-lg-2 col-md-12 p-0 "></div> -->
+  <div class="col-md-9 col-sm-12 pt-3 mx-auto">
+    <router-outlet></router-outlet>
+  </div>
+
+
+</div>
